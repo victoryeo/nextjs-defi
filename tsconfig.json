@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/ErrorBoundary.js"  ],
+,   "pages/ErrorBoundary.js"  ],
   "exclude": [
     "node_modules"
   ]
