@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import qs from "qs";
-import Wallet from "../Wallet/Wallet";
+import Wallet from "../WalletV2/Wallet";
 import styles from "./Swap.module.css";
 
 export default function Swap() {
@@ -84,13 +84,6 @@ export default function Swap() {
         </div>
 
         <Wallet />
-        <div>
-          {account ? (
-            <span className={styles.wallet}>Wallet connected: {account}</span>
-          ) : (
-            <></>
-          )}
-        </div>
       </div>
     </div>
   )
