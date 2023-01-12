@@ -5,6 +5,7 @@ import Onboard from "bnc-onboard";
 import { API } from "bnc-onboard/dist/src/interfaces";
 import Notify from "bnc-notify";
 import { bncDappId, infuraKey, networkId } from "./config";
+import { getItem, removeItem, setItem } from "./localStorage";
 
 interface WalletContextValue {
     onboard: API | null;
@@ -25,6 +26,7 @@ const chainId = networkId ? parseInt(networkId) : 5;
 const wallets: any[] = [];
 
 export const setupWallets = () => {
+    console.log('setupWallet')
     if (infuraKey) {
         wallets.push({
             walletName: "walletConnect",
@@ -130,6 +132,7 @@ const checkWallet = React.useCallback(async () => {
 }, [onboard]);
 
 const selectWallet = React.useCallback(async () => {
+    console.log("selectWallet")
     const walletSelected = await onboard?.walletSelect();
 
     if (walletSelected) {
@@ -147,7 +150,10 @@ const logoutWallet = React.useCallback(async () => {
 // only happens once right after the onboard module is initialized
 // -----------------------------------------------------------------------------------
 useEffect(() => {
-
+  const previouslySelectedWallet = getItem("selectedWallet");
+  if (previouslySelectedWallet && onboard) {
+    onboard.walletSelect(previouslySelectedWallet);
+}
 }, [onboard]);
 
 // -----------------------------------------------------------------------------------
@@ -204,6 +210,7 @@ return (
 };
 
 const useWallet = () => {
+  console.log('useWallet')
   const context = React.useContext(WalletContext);
   if (context === undefined) {
       throw new Error("useWallet must be used within a WalletProvider");
