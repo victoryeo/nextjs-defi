@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button } from "react";
 
 export const ButtonEx = ({ id, title, onClick, disabled }) => {
   return (
