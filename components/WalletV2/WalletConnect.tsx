@@ -89,7 +89,8 @@ useEffect(() => {
         },
         walletSelect: {
             wallets: [
-                { walletName: "metamask", preferred: true },
+                { walletName: "metamask", preferred: false },
+                { walletName: "walletConnect", infuraKey: "d3d8dffhhd9d99", preferred: false },
                 ...(ALLOWED_CHAIN_IDS.includes(chainId) ? wallets : []),
             ],
         },
