@@ -2,6 +2,9 @@ import { Web3OnboardProvider, init } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
 import ConnectWallet from './ConnectWallet'
+import NonSSRWrapper from '../NonSSRWrapper/NonSSRWrapper'
+import Onboard from '@web3-onboard/core'
+import { useEffect, useState } from "react";
 
 const RPC_URL = process.env.REACT_APP_WEB3_PROVIDER_HTTPS!;
 
@@ -31,17 +34,33 @@ const appMetadata = {
   ]
 }
 
-const web3Onboard = init({
+const web3Onboard = Onboard({
   wallets,
   chains,
   appMetadata
 })
 
+const isSSR: any = () => typeof window === 'undefined'; 
+
 function Wallet() {
+  useEffect(() => {
+    let connectedWallets;
+    const fetchData = async () => {
+      connectedWallets = await web3Onboard.connectWallet();
+    }
+
+    fetchData()
+      .catch(console.error);
+    
+    console.log(connectedWallets)
+  }, [])
+
   return (
+    <NonSSRWrapper>
     <Web3OnboardProvider web3Onboard={web3Onboard}>
       <ConnectWallet />
     </Web3OnboardProvider>
+    </NonSSRWrapper>
   )
 }
 
