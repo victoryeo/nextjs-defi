@@ -1,6 +1,8 @@
+import Onboard from '@web3-onboard/core'
 import { Web3OnboardProvider, init } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
+import ConnectWallet from './ConnectWallet'
 
 const RPC_URL = process.env.REACT_APP_WEB3_PROVIDER_HTTPS!;
 
@@ -9,7 +11,7 @@ const walletConnect = walletConnectModule()
 
 const wallets = [
   injected,
-  walletConnect,
+  walletConnect
 ]
 
 const chains = [
@@ -24,27 +26,12 @@ const chains = [
 const web3Onboard = init({
   wallets,
   chains,
-  accountCenter: {
-    desktop: {
-      position: 'bottomRight',
-      enabled: true,
-      minimal: false
-    },
-    mobile: {
-      enabled: true
-    }
-  },
-  appMetadata: {
-    name: 'Web3 Onboard',
-    icon: '',
-    description: 'Web3 onboarding.'
-  },
 })
 
 function Wallet() {
   return (
     <Web3OnboardProvider web3Onboard={web3Onboard}>
-     
+      <ConnectWallet />
     </Web3OnboardProvider>
   )
 }
