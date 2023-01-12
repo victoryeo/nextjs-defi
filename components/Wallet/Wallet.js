@@ -39,7 +39,7 @@ const web3Onboard = init({
   },
 })
 
-function Wallets() {
+function Wallet() {
   return (
     <Web3OnboardProvider web3Onboard={web3Onboard}>
       <ConnectWallet />
@@ -47,4 +47,4 @@ function Wallets() {
   )
 }
 
-export default Wallets;
+export default Wallet;
