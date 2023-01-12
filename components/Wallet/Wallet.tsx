@@ -1,4 +1,3 @@
-import Onboard from '@web3-onboard/core'
 import { Web3OnboardProvider, init } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
@@ -23,9 +22,19 @@ const chains = [
   },
 ]
 
+const appMetadata = {
+  name: 'Connect Wallet',
+  icon: '<svg>My Icon</svg>',
+  description: 'connect a wallet.',
+  recommendedInjectedWallets: [
+    { name: 'MetaMask', url: 'https://metamask.io' }
+  ]
+}
+
 const web3Onboard = init({
   wallets,
   chains,
+  appMetadata
 })
 
 function Wallet() {
