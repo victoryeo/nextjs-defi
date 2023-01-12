@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import qs from "qs";
 import Wallet from "../Wallet/Wallet";
-import styles from './Swap.module.css';
+import styles from "./Swap.module.css";
 
 export default function Swap() {
   const [from, setFrom] = useState("");
@@ -82,9 +82,7 @@ export default function Swap() {
             onChange={(e) => setTo(e.target.value)}
           />
         </div>
-        <button className={styles.swap} onClick={handleClick}>
-          {buttonText}
-        </button>
+
         <Wallet />
         <div>
           {account ? (

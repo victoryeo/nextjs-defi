@@ -20,14 +20,14 @@ export default function ConnectWallet() {
 
   return (
     <div>
-      <ButtonComp
+      <ButtonEx
         disabled={connecting}
         onClick={async () => {
           await connect();
         }}
         title="Connect"
         id="WalletConnect"
-      ></ButtonComp>
+      ></ButtonEx>
     </div>
   );
 }
