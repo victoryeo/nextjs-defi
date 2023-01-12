@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Swap from '../components/Swap/swap';
+import Swap from '../components/Swap/Swap';
 
 export default function Home() {
   return (
