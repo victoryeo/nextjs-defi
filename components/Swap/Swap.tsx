@@ -41,10 +41,13 @@ export default function Swap() {
 
   const getPrice = async () => {
     await fetch(
-      `${process.env.REACT_APP_0X_SWAP_API}/price?${qs.stringify(params)}`
+      `${process.env.ZEROX_SWAP_API}/price?${qs.stringify(params)}`
     )
       .then((res) => res.json())
-      .then((res) => setTo((res.buyAmount / 10 ** 18).toString()));
+      .then((res) => {
+        console.log(res);
+        setTo((res.buyAmount / 10 ** 18).toString())
+      });
   };
 
   return(
