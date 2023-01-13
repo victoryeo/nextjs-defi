@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import qs from "qs";
+import Web3 from 'web3';
 import Wallet from "../WalletV2/Wallet";
 import styles from "./Swap.module.css";
 
@@ -10,9 +11,11 @@ export default function Swap() {
   const [account, setAccount] = useState("");
   const buttonTexts = ["Disable", "Swap"];
 
+  const web3 = new Web3(Web3.givenProvider);
+  
   const sellToken = "ETH";
-  // Aave address in goerli
-  const buyToken = "0x5010abCF8A1fbE56c096DCE9Bb2D29d63e141361"; 
+  // uni address in goerli
+  const buyToken = "0xdc31ee1784292379fbb2964b3b9c4124d8f89c60"; 
 
   let amount = Number(from) * 10 ** 18;
 
@@ -33,6 +36,22 @@ export default function Swap() {
 
   const executeSwap = async () => {
     console.log('executeSwap')
+    const params = {
+      sellToken: sellToken,
+      buyToken: buyToken,
+      sellAmount: amount,
+      takerAddress: account,
+    };
+
+    const response = await fetch(
+      `${process.env.ZEROX_SWAP_API}/quote?${qs.stringify(params)}`
+    );
+    const output = await response.json()
+    console.log(output)
+    const receipt = await web3.eth.sendTransaction(
+      output
+    );
+    console.log(receipt)
   }
 
   const handleClick = () => {
@@ -74,7 +93,7 @@ export default function Swap() {
           />
         </div>
         <div className={styles.toAsset}>
-          <div className={styles.token}>Aave</div>
+          <div className={styles.token}>DAI</div>
           <input
             className={styles.input}
             disabled={false}
