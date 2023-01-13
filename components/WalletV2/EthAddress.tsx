@@ -11,7 +11,7 @@ interface EthAddressProps {
 const EthAddress = ({
     address = "",
     networkId = 1,
-    full = false,
+    full = true,
 }: EthAddressProps) => {
     const displayedAddress = useMemo(() => {
         if (full || !address) return address;
@@ -39,7 +39,7 @@ const EthAddress = ({
     return (
         <Box
             sx={{
-                fontSize: "2rem",
+                fontSize: "1rem",
                 fontWeight: "400",
                 overflow: "hidden",
                 cursor: "pointer",
