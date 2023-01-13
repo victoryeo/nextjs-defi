@@ -7,8 +7,8 @@ export default function Swap() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [buttonText, setButtonText] = useState("");
-  const [account, setAccount] = useState();
-  const buttonTexts = ["Connect Wallet", "Swap"];
+  const [account, setAccount] = useState("");
+  const buttonTexts = ["Swap"];
 
   const sellToken = "ETH";
   // Aave address in goerli
@@ -24,25 +24,17 @@ export default function Swap() {
   };
 
   useEffect(() => {
-    if (account === undefined) {
+    if (account === "") {
       setButtonText(buttonTexts[0]);
-    } else {
-      setButtonText(buttonTexts[1]);
     }
-  }, [account]);
-
-  const connectWallet = async () => {
-
-  };
+  }, []);
 
   const executeSwap = async () => {
-
+    console.log('executeSwap')
   }
 
   const handleClick = () => {
-    if (buttonText === buttonTexts[0]) {
-      connectWallet();
-    } else if (buttonText === buttonTexts[1]) {
+    {
       executeSwap();
     }
   };
@@ -57,13 +49,17 @@ export default function Swap() {
 
   return(
     <div className={styles.container}>
+      <div className={styles.connectWallet}>
+        <div className={styles.title}></div>
+        <Wallet />
+      </div>
       <div className={styles.title}>SWAP API</div>
       <div className={styles.box}>
       <div className={styles.fromAsset}>
           <div className={styles.token}>ETH</div>
           <input
             className={styles.input}
-            disabled={account === undefined}
+            disabled={false}
             type="text"
             placeholder="0"
             value={from}
@@ -75,15 +71,16 @@ export default function Swap() {
           <div className={styles.token}>Aave</div>
           <input
             className={styles.input}
-            disabled={true}
+            disabled={false}
             type="text"
             placeholder="0"
             value={to}
             onChange={(e) => setTo(e.target.value)}
           />
         </div>
-
-        <Wallet />
+        <button className={styles.swap} onClick={handleClick}>
+          {buttonText}
+        </button>
       </div>
     </div>
   )
