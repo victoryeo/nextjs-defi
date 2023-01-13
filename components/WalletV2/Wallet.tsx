@@ -15,7 +15,7 @@ const Wallet: React.FC = () => {
         <>
             {address ? (
                 <>
-                    <EthAddress address={address} networkId={4} />
+                    <EthAddress address={address} networkId={5} />
 
                     <Box
                         onClick={logout}
@@ -27,9 +27,9 @@ const Wallet: React.FC = () => {
                 </>
             ) : (
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     onClick={selectWallet}
-                    color="secondary"
+                    color="primary"
                     sx={{
                         cursor: "pointer",
                         borderRadius: 5,}
