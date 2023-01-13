@@ -12,9 +12,9 @@ export default function Swap() {
   const buttonTexts = ["Disable", "Swap"];
 
   const web3 = new Web3(Web3.givenProvider);
-  
+
   const sellToken = "ETH";
-  // uni address in goerli
+  // dai address in goerli
   const buyToken = "0xdc31ee1784292379fbb2964b3b9c4124d8f89c60"; 
 
   let amount = Number(from) * 10 ** 18;
