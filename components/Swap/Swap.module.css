@@ -18,6 +18,7 @@
   box-shadow: 0px 0px 10px #eee;
 }
 
+.connectWallet,
 .toAsset,
 .fromAsset {
   display: flex;
@@ -28,7 +29,7 @@
 
 .token {
   padding: 22px 22px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .swap {
