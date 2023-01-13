@@ -8,7 +8,7 @@ export default function Swap() {
   const [to, setTo] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [account, setAccount] = useState("");
-  const buttonTexts = ["Swap"];
+  const buttonTexts = ["Disable", "Swap"];
 
   const sellToken = "ETH";
   // Aave address in goerli
@@ -24,17 +24,20 @@ export default function Swap() {
   };
 
   useEffect(() => {
-    if (account === "") {
+    if (account == "" || account == null) {
       setButtonText(buttonTexts[0]);
+    } else {
+      setButtonText(buttonTexts[1]);
     }
-  }, []);
+  }, [account]);
 
   const executeSwap = async () => {
     console.log('executeSwap')
   }
 
   const handleClick = () => {
-    {
+    console.log(account)
+    if (account != "") {
       executeSwap();
     }
   };
@@ -54,7 +57,7 @@ export default function Swap() {
     <div className={styles.container}>
       <div className={styles.connectWallet}>
         <div className={styles.title}></div>
-        <Wallet />
+        <Wallet setAcc={setAccount}/>
       </div>
       <div className={styles.title}>SWAP API</div>
       <div className={styles.box}>

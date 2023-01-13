@@ -1,15 +1,25 @@
+import React, { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import EthAddress from "./EthAddress";
 import { useWallet } from "./WalletConnect";
 
-const Wallet: React.FC = () => {
+interface Props {
+  setAcc: Function
+}
+
+const Wallet: React.FC<Props> = ({setAcc}) => {
     const { selectWallet, logoutWallet, address } = useWallet();
 
     const logout = () => {
         console.log("logging out");
         logoutWallet();
     };
+
+    useEffect(() => {
+      console.log(setAcc)
+      setAcc(address)
+    }, [address]);
 
     return (
         <>
