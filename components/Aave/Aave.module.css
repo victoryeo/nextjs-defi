@@ -8,3 +8,34 @@
   font-weight: bold;
   color: #2e24f5;
 }
+
+.box {
+  margin-top: 2rem;
+  width: 800px;
+  border-radius: 15px;
+  background-color: #ffff9e;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #eee;
+}
+
+.aavebox {
+  margin-top: 2rem;
+  width: 800px;
+  border-radius: 15px;
+  background-color: #ffff9e;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #000;
+}
+
+.aave {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem;
+}
+
+.token {
+  padding: 22px 22px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}

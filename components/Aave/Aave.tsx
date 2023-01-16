@@ -5,6 +5,16 @@ export default function Aave() {
     <div className={styles.container}>
       <div className={styles.title}>Aave API
       </div>
+      <div className={styles.box}>
+        <div className={styles.aave}>
+          <div className={styles.aavebox}>
+          <div className={styles.token}>Assets to Supply</div>
+          </div>
+          <div className={styles.aavebox}>
+          <div className={styles.token}>Assets to Borrow</div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
