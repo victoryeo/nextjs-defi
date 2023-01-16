@@ -1,4 +1,5 @@
 import { AaveSupplyTab } from "./AaveSupplyTab";
+import { AaveBorrowTab } from "./AaveBorrowTab";
 import styles from "./Aave.module.css";
 
 const listSupply = [
@@ -13,6 +14,21 @@ const listSupply = [
   },
   {
     header: 'Can be collateral',
+  },
+];
+
+const listBorrow = [
+  {
+    heading: 'Assets',
+  },
+  {
+    heading: 'Available',
+  },
+  {
+    heading: 'APY, variable',
+  },
+  {
+    heading: 'APY, stable',
   },
 ];
 
@@ -32,6 +48,9 @@ export default function Aave() {
           <div className={styles.emptybox}></div>
           <div className={styles.aavebox}>
             <div className={styles.token}>Assets to Borrow</div>
+            <AaveBorrowTab
+            listTab={listBorrow}
+            />
           </div>
         </div>
       </div>
