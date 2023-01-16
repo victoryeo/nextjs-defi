@@ -17,7 +17,6 @@ const Wallet: React.FC<ParamProps> = ({setAcc}) => {
     };
 
     useEffect(() => {
-      console.log(setAcc)
       setAcc(address)
     }, [address]);
 
