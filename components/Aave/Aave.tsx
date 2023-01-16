@@ -1,18 +1,18 @@
-import { AaveHomeTab } from "./AaveHomeTab";
+import { AaveSupplyTab } from "./AaveSupplyTab";
 import styles from "./Aave.module.css";
 
 const listTab = [
   {
-    status: 'Assets',
+    header: 'Assets',
   },
   {
-    status: 'Wallet balance',
+    header: 'Wallet balance',
   },
   {
-    status: 'APY',
+    header: 'APY',
   },
   {
-    status: 'Can be collateral',
+    header: 'Can be collateral',
   },
 ];
 
@@ -25,7 +25,7 @@ export default function Aave() {
         <div className={styles.aave}>
           <div className={styles.aavebox}>
             <div className={styles.token}>Assets to Supply</div>
-            <AaveHomeTab
+            <AaveSupplyTab
             listTab={listTab}
             />
           </div>
