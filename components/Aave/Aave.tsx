@@ -3,32 +3,24 @@ import { AaveBorrowTab } from "./AaveBorrowTab";
 import { TokenList } from "./TokenList";
 import styles from "./Aave.module.css";
 
-const listSupply = [
-  {
+const listSupply = [{
     header: 'Assets',
-  },
-  {
+  },{
     header: 'Wallet balance',
-  },
-  {
+  },{
     header: 'APY',
-  },
-  {
+  },{
     header: 'Can be collateral',
   },
 ];
 
-const listBorrow = [
-  {
+const listBorrow = [{
     heading: 'Assets',
-  },
-  {
+  },{
     heading: 'Available',
-  },
-  {
+  },{
     heading: 'APY, variable',
-  },
-  {
+  },{
     heading: 'APY, stable',
   },
 ];
