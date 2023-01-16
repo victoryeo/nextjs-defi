@@ -1,5 +1,6 @@
 import { AaveSupplyTab } from "./AaveSupplyTab";
 import { AaveBorrowTab } from "./AaveBorrowTab";
+import { TokenList } from "./TokenList";
 import styles from "./Aave.module.css";
 
 const listSupply = [
@@ -44,6 +45,7 @@ export default function Aave() {
             <AaveSupplyTab
             listTab={listSupply}
             />
+            <TokenList/>
           </div>
           <div className={styles.emptybox}></div>
           <div className={styles.aavebox}>
