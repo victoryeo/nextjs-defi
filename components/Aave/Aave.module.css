@@ -18,6 +18,14 @@
   box-shadow: 0px 0px 10px #eee;
 }
 
+.emptybox {
+  margin-top: 2rem;
+  width: 40px;
+  border-radius: 10px;
+  background-color: #ffff9e;
+  padding: 0px;
+}
+
 .aavebox {
   margin-top: 2rem;
   width: 800px;

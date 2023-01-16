@@ -10,6 +10,7 @@ export default function Aave() {
           <div className={styles.aavebox}>
           <div className={styles.token}>Assets to Supply</div>
           </div>
+          <div className={styles.emptybox}></div>
           <div className={styles.aavebox}>
           <div className={styles.token}>Assets to Borrow</div>
           </div>
