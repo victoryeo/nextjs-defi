@@ -11,7 +11,7 @@
 
 .box {
   margin-top: 2rem;
-  width: 800px;
+  width: 1000px;
   border-radius: 15px;
   background-color: #ffff9e;
   padding: 20px;
@@ -46,4 +46,9 @@
   padding: 22px 22px;
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.aavespan {
+  margin: 1rem 1rem;
+  display:inline-block;
 }
