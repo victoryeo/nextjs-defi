@@ -4,11 +4,11 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import EthAddress from "./EthAddress";
 import { useWallet } from "./WalletConnect";
 
-interface Props {
+interface ParamProps {
   setAcc: Function
 }
 
-const Wallet: React.FC<Props> = ({setAcc}) => {
+const Wallet: React.FC<ParamProps> = ({setAcc}) => {
     const { selectWallet, logoutWallet, address } = useWallet();
 
     const logout = () => {
