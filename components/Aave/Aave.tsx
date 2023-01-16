@@ -1,7 +1,7 @@
 import { AaveSupplyTab } from "./AaveSupplyTab";
 import styles from "./Aave.module.css";
 
-const listTab = [
+const listSupply = [
   {
     header: 'Assets',
   },
@@ -26,7 +26,7 @@ export default function Aave() {
           <div className={styles.aavebox}>
             <div className={styles.token}>Assets to Supply</div>
             <AaveSupplyTab
-            listTab={listTab}
+            listTab={listSupply}
             />
           </div>
           <div className={styles.emptybox}></div>
