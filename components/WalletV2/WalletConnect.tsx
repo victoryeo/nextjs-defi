@@ -4,8 +4,10 @@ import { Web3Provider } from "@ethersproject/providers";
 import Onboard from "bnc-onboard";
 import { API } from "bnc-onboard/dist/src/interfaces";
 import Notify from "bnc-notify";
+import { useDispatch, useSelector } from "react-redux";
 import { bncDappId, infuraKey, networkId } from "./config";
 import { getItem, removeItem, setItem } from "./localStorage";
+import { setAuthState } from "../../redux/reducers";
 
 interface WalletContextValue {
     onboard: API | null;
@@ -62,8 +64,9 @@ const [network, setNetwork] = useState<number | null>(null);
 
 const [onboard, setOnboard] = useState<API | null>(null);
 const [notify, setNotify] = useState<any>(null);
+const dispatch = useDispatch();
 
-useEffect(() => {
+useEffect(() => {    
     const onboard = Onboard({
         dappId: bncDappId,
         networkId: chainId,
@@ -75,8 +78,8 @@ useEffect(() => {
                         wallet.provider
                     );
                     setWeb3Provider(ethersProvider);
-
-                   
+                    dispatch(setAuthState(true))
+ 
                 } else {
                     // logging out
                     setWeb3Provider(null);
@@ -90,7 +93,7 @@ useEffect(() => {
         walletSelect: {
             wallets: [
                 { walletName: "metamask", preferred: false },
-                { walletName: "walletConnect", infuraKey: "d3d8dffhhd9d99", preferred: false },
+                //{ walletName: "walletConnect", infuraKey: "d3d8dffhhd9d99", preferred: false },
                 ...(ALLOWED_CHAIN_IDS.includes(chainId) ? wallets : []),
             ],
         },
