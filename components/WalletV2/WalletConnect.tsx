@@ -7,7 +7,8 @@ import Notify from "bnc-notify";
 import { useDispatch, useSelector } from "react-redux";
 import { bncDappId, infuraKey, networkId } from "./config";
 import { getItem, removeItem, setItem } from "./localStorage";
-import { setAuthState } from "../../redux/reducers";
+import { rootActions } from "../../redux/reducers";
+import { selectAuthState } from "../../redux/selectors"
 
 interface WalletContextValue {
     onboard: API | null;
@@ -64,9 +65,11 @@ const [network, setNetwork] = useState<number | null>(null);
 
 const [onboard, setOnboard] = useState<API | null>(null);
 const [notify, setNotify] = useState<any>(null);
+
+const authState = useSelector(selectAuthState);
 const dispatch = useDispatch();
 
-useEffect(() => {    
+useEffect(() => {
     const onboard = Onboard({
         dappId: bncDappId,
         networkId: chainId,
@@ -78,7 +81,8 @@ useEffect(() => {
                         wallet.provider
                     );
                     setWeb3Provider(ethersProvider);
-                    dispatch(setAuthState(true))
+                    console.log(authState)
+                    dispatch(rootActions.setAuthState(true))
  
                 } else {
                     // logging out
@@ -146,6 +150,7 @@ const selectWallet = React.useCallback(async () => {
 
 const logoutWallet = React.useCallback(async () => {
     setAddress(null);
+    console.log(authState)
     return onboard?.walletReset();
 }, [onboard]);
 

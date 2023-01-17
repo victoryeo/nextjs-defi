@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../../store/store";
 import { HYDRATE } from "next-redux-wrapper";
 
 // Type for our state
@@ -18,12 +17,19 @@ export const rootSlice = createSlice({
   reducers: {
 
     // Action to set the authentication status
-    setAuthState(state, action) {
-      console.log('setAuthState')
-      state.authState = action.payload;
+    setAuthState: (state, action) => {
+      console.log('setAuthState', action)
+      state.authState = action.payload
     },
+    /*{
+      console.log('setAuthState', action)
+      state.authState = action.payload
+      const newState = { ...state, authState: action.payload }
+      console.log(newState)
+      return newState;
+    },*/
 
-    setWeb3Provider(state, action) {
+    setWeb3Provider: (state, action) => {
       console.log('setWeb3Provider')
     },
 
@@ -40,8 +46,6 @@ export const rootSlice = createSlice({
   },
 });
 
-export const { setAuthState } = rootSlice.actions;
-
-export const selectAuthState = (state: AppState) => state.root.authState;
+export const rootActions = rootSlice.actions;
 
 export default rootSlice.reducer;
