@@ -81,9 +81,11 @@ useEffect(() => {
                         wallet.provider
                     );
                     setWeb3Provider(ethersProvider);
+                    const signer = ethersProvider.getSigner()
                     console.log(authState)
                     dispatch(rootActions.setAuthState(true))
                     dispatch(rootActions.setWeb3Provider(ethersProvider))
+                    dispatch(rootActions.setReduxSigner(signer))
  
                 } else {
                     // logging out

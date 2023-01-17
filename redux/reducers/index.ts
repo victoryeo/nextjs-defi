@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { Web3Provider } from "@ethersproject/providers";
+import { Web3Provider, JsonRpcSigner } from "@ethersproject/providers";
 
 // Type for our state
 export interface RootState {
   authState: boolean;
   web3Provider: Web3Provider;
+  signer: JsonRpcSigner;
 }
 
 // Initial state
 const initialState: RootState = {
   authState: false,
   web3Provider: null,
+  signer: null,
 };
 
 export const rootSlice = createSlice({
@@ -33,6 +35,11 @@ export const rootSlice = createSlice({
     setWeb3Provider: (state, action) => {
       console.log('setWeb3Provider')
       state.web3Provider = action.payload
+    },
+
+    setReduxSigner(state, action) {
+      console.log('setReduxSigner')
+      state.signer = action.payload;
     },
   },
   // Special reducer for hydrating the state. Special case for next-redux-wrapper
