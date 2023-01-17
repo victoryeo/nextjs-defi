@@ -34,17 +34,15 @@ export const rootSlice = createSlice({
       console.log('setWeb3Provider')
       state.web3Provider = action.payload
     },
-
-    // Special reducer for hydrating the state. Special case for next-redux-wrapper
-    extraReducers: {
-      [HYDRATE]: (state, action) => {
-        return {
-          ...state,
-          ...action.payload.auth,
-        };
-      },
+  },
+  // Special reducer for hydrating the state. Special case for next-redux-wrapper
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.auth,
+      };
     },
-
   },
 });
 
