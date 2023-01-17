@@ -52,173 +52,173 @@ const WalletContext = createContext<WalletContextValue>({
 });
 
 const WalletProvider = ({ children }: any) => {
-const [web3Provider, setWeb3Provider] = useState<Web3Provider | null>(null);
-const [address, setAddress] = useState<string | null>(null);
-const [network, setNetwork] = useState<number | null>(null);
+    const [web3Provider, setWeb3Provider] = useState<Web3Provider | null>(null);
+    const [address, setAddress] = useState<string | null>(null);
+    const [network, setNetwork] = useState<number | null>(null);
 
-// -----------------------------------------------------------------------------------
-// Initialize onboard and notify library
-// -----------------------------------------------------------------------------------
-// note: we are not currently doing anything with a user's balance
-// if we wanted to, there is a userWallet that we can use and keep updated
-// via onbard.getState()
+    // -----------------------------------------------------------------------------------
+    // Initialize onboard and notify library
+    // -----------------------------------------------------------------------------------
+    // note: we are not currently doing anything with a user's balance
+    // if we wanted to, there is a userWallet that we can use and keep updated
+    // via onbard.getState()
 
-const [onboard, setOnboard] = useState<API | null>(null);
-const [notify, setNotify] = useState<any>(null);
+    const [onboard, setOnboard] = useState<API | null>(null);
+    const [notify, setNotify] = useState<any>(null);
 
-const authState = useSelector(selectAuthState);
-const dispatch = useDispatch();
+    const authState = useSelector(selectAuthState);
+    const dispatch = useDispatch();
 
-useEffect(() => {
-    const onboard = Onboard({
-        dappId: bncDappId,
-        networkId: chainId,
-        hideBranding: true,
-        subscriptions: {
-            wallet: (wallet) => {
-                if (wallet.provider) {
-                    const ethersProvider = new ethers.providers.Web3Provider(
-                        wallet.provider
-                    );
-                    setWeb3Provider(ethersProvider);
-                    const signer = ethersProvider.getSigner()
-                    console.log(authState)
-                    dispatch(rootActions.setAuthState(true))
-                    dispatch(rootActions.setWeb3Provider(ethersProvider))
-                    dispatch(rootActions.setReduxSigner(signer))
- 
-                } else {
-                    // logging out
-                    setWeb3Provider(null);
-                    
-                }
+    useEffect(() => {
+        const onboard = Onboard({
+            dappId: bncDappId,
+            networkId: chainId,
+            hideBranding: true,
+            subscriptions: {
+                wallet: (wallet) => {
+                    if (wallet.provider) {
+                        const ethersProvider = new ethers.providers.Web3Provider(
+                            wallet.provider
+                        );
+                        setWeb3Provider(ethersProvider);
+                        const signer = ethersProvider.getSigner()
+                        console.log(authState)
+                        dispatch(rootActions.setAuthState(true))
+                        dispatch(rootActions.setWeb3Provider(ethersProvider))
+                        dispatch(rootActions.setReduxSigner(signer))
+    
+                    } else {
+                        // logging out
+                        setWeb3Provider(null);
+                        
+                    }
+                },
+                address: (address) =>
+                    address ? setAddress(ethers.utils.getAddress(address)) : "",
+                network: setNetwork,
             },
-            address: (address) =>
-                address ? setAddress(ethers.utils.getAddress(address)) : "",
-            network: setNetwork,
-        },
-        walletSelect: {
-            wallets: [
-                { walletName: "metamask", preferred: false },
-                //{ walletName: "walletConnect", infuraKey: "d3d8dffhhd9d99", preferred: false },
-                ...(ALLOWED_CHAIN_IDS.includes(chainId) ? wallets : []),
-            ],
-        },
-        walletCheck: [{ checkName: "connect" }, { checkName: "network" }],
-    });
+            walletSelect: {
+                wallets: [
+                    { walletName: "metamask", preferred: false },
+                    //{ walletName: "walletConnect", infuraKey: "d3d8dffhhd9d99", preferred: false },
+                    ...(ALLOWED_CHAIN_IDS.includes(chainId) ? wallets : []),
+                ],
+            },
+            walletCheck: [{ checkName: "connect" }, { checkName: "network" }],
+        });
 
-    const notify = Notify({
-        dappId: bncDappId,
-        networkId: chainId,
-        darkMode: true,
-    });
+        const notify = Notify({
+            dappId: bncDappId,
+            networkId: chainId,
+            darkMode: true,
+        });
 
-    setOnboard(onboard);
-    setNotify(notify);
-}, []);
+        setOnboard(onboard);
+        setNotify(notify);
+    }, []);
 
-// -----------------------------------------------------------------------------------
-// If network changes, the getNetwork call with throw network change error with the
-// previously connected network. This is what the provider is initialized with and
-// is what we want.
-// -----------------------------------------------------------------------------------
-const getProviderNetwork = React.useCallback(async () => {
-    try {
-        return await web3Provider?.getNetwork();
-    } catch (e) {
-        console.log("error ", e);
-        return null;
+    // -----------------------------------------------------------------------------------
+    // If network changes, the getNetwork call with throw network change error with the
+    // previously connected network. This is what the provider is initialized with and
+    // is what we want.
+    // -----------------------------------------------------------------------------------
+    const getProviderNetwork = React.useCallback(async () => {
+        try {
+            return await web3Provider?.getNetwork();
+        } catch (e) {
+            console.log("error ", e);
+            return null;
+        }
+    }, [web3Provider]);
+
+    // -----------------------------------------------------------------------------------
+    // Wallet utility functions
+    // -----------------------------------------------------------------------------------
+    // note: call this before web3 txs and it will run through a series of checks that we
+    // can customize during initialization. Defaults to checking to make sure the wallet
+    // is connected.
+    // https://docs.blocknative.com/onboard#wallet-check-modules
+    const checkWallet = React.useCallback(async () => {
+        return onboard?.walletCheck();
+    }, [onboard]);
+
+    const selectWallet = React.useCallback(async () => {
+        console.log("selectWallet")
+        const walletSelected = await onboard?.walletSelect();
+
+        if (walletSelected) {
+            await onboard?.walletCheck();
+        }
+    }, [onboard]);
+
+    const logoutWallet = React.useCallback(async () => {
+        setAddress(null);
+        console.log(authState)
+        return onboard?.walletReset();
+    }, [onboard]);
+
+    // -----------------------------------------------------------------------------------
+    // Load the previous connected wallet so returning users have nice experience
+    // only happens once right after the onboard module is initialized
+    // -----------------------------------------------------------------------------------
+    useEffect(() => {
+    const previouslySelectedWallet = getItem("selectedWallet");
+    if (previouslySelectedWallet && onboard) {
+        onboard.walletSelect(previouslySelectedWallet);
     }
-}, [web3Provider]);
+    }, [onboard]);
 
-// -----------------------------------------------------------------------------------
-// Wallet utility functions
-// -----------------------------------------------------------------------------------
-// note: call this before web3 txs and it will run through a series of checks that we
-// can customize during initialization. Defaults to checking to make sure the wallet
-// is connected.
-// https://docs.blocknative.com/onboard#wallet-check-modules
-const checkWallet = React.useCallback(async () => {
-    return onboard?.walletCheck();
-}, [onboard]);
+    // -----------------------------------------------------------------------------------
+    // Force re-initialization of wallet on network change
+    // -----------------------------------------------------------------------------------
+    const reloadWalletOnNetworkChange = React.useCallback(async () => {
+        if (!network) return;
 
-const selectWallet = React.useCallback(async () => {
-    console.log("selectWallet")
-    const walletSelected = await onboard?.walletSelect();
+        const providerNetwork = await getProviderNetwork();
 
-    if (walletSelected) {
-        await onboard?.walletCheck();
-    }
-}, [onboard]);
+        // get current wallet info so can auto log back in
+        const userState = await onboard?.getState();
+        const wallet = userState && userState.wallet;
+        if (!wallet || !wallet.name) return;
 
-const logoutWallet = React.useCallback(async () => {
-    setAddress(null);
-    console.log(authState)
-    return onboard?.walletReset();
-}, [onboard]);
+        // if provider network is different, then the user has changed networks
+        if (providerNetwork && providerNetwork.chainId !== network) {
+            // reset wallet to trigger a full re-initialization on wallet select
+            await onboard?.walletReset();
 
-// -----------------------------------------------------------------------------------
-// Load the previous connected wallet so returning users have nice experience
-// only happens once right after the onboard module is initialized
-// -----------------------------------------------------------------------------------
-useEffect(() => {
-  const previouslySelectedWallet = getItem("selectedWallet");
-  if (previouslySelectedWallet && onboard) {
-    onboard.walletSelect(previouslySelectedWallet);
-}
-}, [onboard]);
+            // re-select the wallet
+            // const walletSelected = await onboard?.walletSelect(wallet.name);
+            await onboard?.walletSelect(wallet.name);
+        }
 
-// -----------------------------------------------------------------------------------
-// Force re-initialization of wallet on network change
-// -----------------------------------------------------------------------------------
-const reloadWalletOnNetworkChange = React.useCallback(async () => {
-    if (!network) return;
+        if (providerNetwork && providerNetwork.chainId !== chainId) {
+            await onboard?.walletCheck();
+        }
+    }, [onboard, getProviderNetwork, network]);
 
-    const providerNetwork = await getProviderNetwork();
+    useEffect(() => {
+        reloadWalletOnNetworkChange();
+    }, [reloadWalletOnNetworkChange]);
 
-    // get current wallet info so can auto log back in
-    const userState = await onboard?.getState();
-    const wallet = userState && userState.wallet;
-    if (!wallet || !wallet.name) return;
+    const isRightNetwork = () => network === chainId;
 
-    // if provider network is different, then the user has changed networks
-    if (providerNetwork && providerNetwork.chainId !== network) {
-        // reset wallet to trigger a full re-initialization on wallet select
-        await onboard?.walletReset();
-
-        // re-select the wallet
-        // const walletSelected = await onboard?.walletSelect(wallet.name);
-        await onboard?.walletSelect(wallet.name);
-    }
-
-    if (providerNetwork && providerNetwork.chainId !== chainId) {
-        await onboard?.walletCheck();
-    }
-}, [onboard, getProviderNetwork, network]);
-
-useEffect(() => {
-    reloadWalletOnNetworkChange();
-}, [reloadWalletOnNetworkChange]);
-
-const isRightNetwork = () => network === chainId;
-
-return (
-    <WalletContext.Provider
-        value={{
-            onboard,
-            web3Provider,
-            address,
-            network,
-            selectWallet,
-            checkWallet,
-            logoutWallet,
-            notify,
-            isRightNetwork,
-        }}
-    >
-        {children}
-    </WalletContext.Provider>
-);
+    return (
+        <WalletContext.Provider
+            value={{
+                onboard,
+                web3Provider,
+                address,
+                network,
+                selectWallet,
+                checkWallet,
+                logoutWallet,
+                notify,
+                isRightNetwork,
+            }}
+        >
+            {children}
+        </WalletContext.Provider>
+    );
 };
 
 const useWallet = () => {
