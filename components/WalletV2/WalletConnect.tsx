@@ -83,6 +83,7 @@ useEffect(() => {
                     setWeb3Provider(ethersProvider);
                     console.log(authState)
                     dispatch(rootActions.setAuthState(true))
+                    dispatch(rootActions.setWeb3Provider(ethersProvider))
  
                 } else {
                     // logging out
