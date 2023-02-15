@@ -1,6 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { Web3Provider, JsonRpcSigner } from "@ethersproject/providers";
+import { AppState } from "../../store/store";
+
+const hydrate = createAction<AppState>(HYDRATE);
 
 // Type for our state
 export interface RootState {
@@ -43,13 +46,13 @@ export const rootSlice = createSlice({
     },
   },
   // Special reducer for hydrating the state. Special case for next-redux-wrapper
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
+  extraReducers: builder => {
+    builder.addCase(hydrate, (state, action) => {
       return {
         ...state,
-        ...action.payload.auth,
-      };
-    },
+        ...action.payload.root
+      }
+    })
   },
 });
 
