@@ -34,5 +34,4 @@ export const userSlice = createSlice({
 })
 
 export const { setUserAddress } = userSlice.actions
-export const selectUserState = (state: AppState) => state.user.userAddress;
 export default userSlice.reducer
