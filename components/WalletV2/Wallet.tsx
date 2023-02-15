@@ -3,6 +3,8 @@ import { Box, Button, Typography } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import EthAddress from "./EthAddress";
 import { useWallet } from "./WalletConnect";
+import { useDispatch } from "react-redux"; 
+import { setUserAddress } from '../../redux/reducers/user';
 
 interface ParamProps {
   setAcc: Function
@@ -10,6 +12,7 @@ interface ParamProps {
 
 const Wallet: React.FC<ParamProps> = ({setAcc}) => {
     const { selectWallet, logoutWallet, address } = useWallet();
+    const dispatch = useDispatch()
 
     const logout = () => {
         console.log("logging out");
@@ -18,6 +21,7 @@ const Wallet: React.FC<ParamProps> = ({setAcc}) => {
 
     useEffect(() => {
       setAcc(address)
+      dispatch(setUserAddress(address))
     }, [address]);
 
     return (
