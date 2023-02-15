@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { useSelector } from "react-redux";
 import { getWethGwContract } from "../../utils/web3Utils";
 import { selectSigner } from "../../redux/selectors"
+import { selectUserAddress } from "../../redux/selectors/user";
 import contracts from "../../config/constants/contracts";
 import styles from "./Aave.module.css";
 
@@ -21,6 +22,7 @@ const tokenList = [
 ];
 
 let contractWETH: ethers.Contract;
+let account: string;
 
 const handleClick = async (token) => {
   alert("supply "+token)
@@ -29,10 +31,11 @@ const handleClick = async (token) => {
     console.log("supply DAI")
   } else if (token === "ETH") {
     console.log("supply ETH")
-    const ethOverrides = { ...overrides, value: 1 };
+    console.log(account)
+    const ethOverrides = { ...overrides, value: 1 /* 1wei */ };
     const newSupply = await contractWETH.depositETH(
       contracts.LENDING_POOL[5],
-      "0x3dfdefe45660999e22344273448535fa8379389377",
+      account,
       0, // referralCode
       ethOverrides
     );
@@ -40,6 +43,7 @@ const handleClick = async (token) => {
 }
 
 export const TokenList = () => {
+  account = useSelector(selectUserAddress);
   const signer = useSelector(selectSigner);
   contractWETH = getWethGwContract(signer);
 
