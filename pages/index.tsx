@@ -1,12 +1,39 @@
 import Head from 'next/head'
+import { useState, useEffect } from 'react'
 import { useConnectWallet } from '@web3-onboard/react'
 import { ethers } from 'ethers'
+import { useDispatch } from "react-redux"; 
 import styles from '../styles/Home.module.css';
 import Zerox from '../components/Zerox/Zerox';
 import Aave from '../components/Aave/Aave';
+import { ButtonEx } from "../components/ButtonEx/ButtonEx";
+import { setUserAddress } from '../redux/reducers/user';
+import { rootActions } from "../redux/reducers";
+
+interface Account {
+  address: string;
+  balance: Record<string, string>;
+}
 
 export default function Home() {
+  const dispatch = useDispatch()
+
+  const [account, setAccount] = useState<Account | null>(null);
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
+  
+  useEffect(() => {
+    console.log("account", wallet?.accounts[0])
+    if (wallet?.provider) {
+      const signer = ethersProvider.getSigner()
+      dispatch(setUserAddress(wallet.accounts[0].address))
+      dispatch(rootActions.setWeb3Provider(ethersProvider))
+      dispatch(rootActions.setReduxSigner(signer))
+      setAccount({
+        address: wallet.accounts[0].address,
+        balance: wallet.accounts[0].balance
+      })
+    }
+  }, [wallet])
 
   // create an ethers provider
   let ethersProvider
@@ -14,33 +41,46 @@ export default function Home() {
   if (wallet) {
     ethersProvider = new ethers.providers.Web3Provider(wallet.provider, 'any')
   }
+
+  if (wallet?.provider) {
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>DeFi</title>
+        </Head>
+        <div>
+          <div className={styles.wallet}>{ account?.address}</div>
+          <ButtonEx
+            onClick={() => {
+              disconnect({ label: wallet.label });
+            }}
+            title="Disconnect"
+            id="WalletDisconnect"
+          ></ButtonEx>
+        </div>
+        <Zerox/>
+        <Aave/>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <Head>
         <title>DeFi</title>
       </Head>
-      <button
-          style={buttonStyles}
+      <div className={styles.connectWallet}>
+        <ButtonEx
           disabled={connecting}
-          onClick={() => (wallet ? disconnect(wallet) : connect())}
-        >
-          {connecting ? 'Connecting' : wallet ? 'Disconnect Wallet' : 'Connect Wallet'}
-        </button>
+          onClick={async () => {
+            await connect();
+          }}
+          title="Connect"
+          id="WalletConnect"
+        ></ButtonEx>
+      </div>
       <Zerox/>
       <Aave/>
     </div>
   )
-}
-
-const buttonStyles = {
-  borderRadius: '6px',
-  background: '#111827',
-  border: 'none',
-  fontSize: '18px',
-  fontWeight: '600',
-  cursor: 'pointer',
-  color: 'white',
-  padding: '14px 12px',
-  marginTop: '40px',
-  fontFamily: 'inherit'
 }

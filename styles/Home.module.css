@@ -85,3 +85,46 @@
     flex-direction: column;
   }
 }
+
+.connectWallet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toAsset,
+.fromAsset {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem;
+}
+
+.wallet {
+  display: flex;
+  justify-content: space-between;
+}
+
+.walletBtn {
+  border-radius: '6px';
+  background: '#111827';
+  border: 'none';
+  font-size: 1.25rem;
+  font-weight: '600';
+  cursor: 'pointer';
+  color: 'white';
+  padding: '14px 12px';
+  margin-top: '40px';
+  font-family: 'arial';
+}
+
+.box {
+  margin-top: 2rem;
+  width: 1000px;
+  border-radius: 15px;
+  background-color: #ffff9e;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #eee;
+  justify-content: right;
+}
