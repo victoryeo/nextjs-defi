@@ -1,4 +1,4 @@
-This is a swap example witten in NextJS.  
+This is a DeFi example witten in NextJS.  
 
 Steps to run:  
 copy .env-sample to .env.local  
