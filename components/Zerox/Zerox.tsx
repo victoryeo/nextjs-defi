@@ -74,10 +74,6 @@ export default function Zerox() {
 
   return(
     <div className={styles.container}>
-      <div className={styles.connectWallet}>
-        <div className={styles.title}></div>
-        <Wallet setAcc={setAccount}/>
-      </div>
       <div className={styles.title}>0x Swap API</div>
       <div className={styles.box}>
       <div className={styles.fromAsset}>

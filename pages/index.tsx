@@ -24,7 +24,7 @@ export default function Home() {
           disabled={connecting}
           onClick={() => (wallet ? disconnect(wallet) : connect())}
         >
-          {connecting ? 'Connecting' : wallet ? 'Disconnect' : 'Connect Wallet'}
+          {connecting ? 'Connecting' : wallet ? 'Disconnect Wallet' : 'Connect Wallet'}
         </button>
       <Zerox/>
       <Aave/>
