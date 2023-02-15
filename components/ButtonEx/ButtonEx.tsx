@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 interface ButtonProps {
   id: string;
@@ -10,7 +10,8 @@ interface ButtonProps {
 export const ButtonEx = ({ id, title, onClick, disabled }: ButtonProps) => {
   return (
     <div>
-      <Button id={id} onClick={onClick} disabled={disabled}>{title}</Button>
+      <Button id={id} onClick={onClick} disabled={disabled}>{title}
+      </Button>
     </div>
   );
 }
