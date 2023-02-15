@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import qs from "qs";
 import Web3 from 'web3';
+import { useSelector } from "react-redux";
 import Wallet from "../WalletV2/Wallet";
 import styles from "./Zerox.module.css";
+import { selectUserAddress } from "../../redux/selectors/user";
 
 export default function Zerox() {
+  const account = useSelector(selectUserAddress);
+
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [buttonText, setButtonText] = useState("");
-  const [account, setAccount] = useState("");
+  //const [account, setAccount] = useState("");
   const buttonTexts = ["Disable", "Swap"];
 
   const web3 = new Web3(Web3.givenProvider);
