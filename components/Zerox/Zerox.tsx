@@ -78,7 +78,7 @@ export default function Zerox() {
         <div className={styles.title}></div>
         <Wallet setAcc={setAccount}/>
       </div>
-      <div className={styles.title}>Swap API</div>
+      <div className={styles.title}>0x Swap API</div>
       <div className={styles.box}>
       <div className={styles.fromAsset}>
           <div className={styles.token}>ETH</div>

@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Swap</title>
+        <title>DeFi</title>
       </Head>
       <Zerox/>
       <Aave/>
