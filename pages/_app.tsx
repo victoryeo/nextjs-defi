@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { Provider } from "react-redux";
@@ -8,8 +9,19 @@ import { setupWallets, WalletProvider } from "../components/WalletV2/WalletConne
 
 setupWallets();
 
+const expensiveCalculation = (num) => {
+  console.log("Calculating...");
+  for (let i = 0; i < 1000000000; i++) {
+    num += 1;
+  }
+  return num;
+};
+
 const App = ({ Component, pageProps }: AppProps) => {
+  const [count, setCount] = useState(0);
+
   const { store, props } = wrapper.useWrappedStore(pageProps);
+  const calculation = useMemo(() => expensiveCalculation(count), [count]);
 
   return (
     <Provider store={store}>
