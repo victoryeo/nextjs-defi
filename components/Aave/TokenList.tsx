@@ -62,7 +62,10 @@ export const TokenList = () => {
       {tokenList.map((e: any) => (
         <span className={styles.aaveblock}
           key={e.heading} >
-          {e.heading} {e.balance} {e.rate} {e.collateral} 
+          {e.heading} &nbsp;&nbsp;&nbsp; 
+          {e.balance} &nbsp;&nbsp;&nbsp; 
+          {e.rate} &nbsp;&nbsp;&nbsp; 
+          {e.collateral} 
           <button className={styles.supplyLiquidity} onClick={()=>handleClick(e.heading)} >
             Supply
           </button>
