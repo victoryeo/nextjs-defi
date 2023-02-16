@@ -48,16 +48,19 @@ export default function Home() {
         <Head>
           <title>DeFi</title>
         </Head>
-        <div>
-          <div className={styles.wallet}>{ account?.address}</div>
-          <ButtonEx
-            onClick={() => {
-              disconnect({ label: wallet.label });
-            }}
-            title="Disconnect"
-            id="WalletDisconnect"
-            bsPrefix={styles.walletBtnDisconnect}
-          ></ButtonEx>
+        <div className={styles.connectWallet}>
+          <div className={styles.wallet}>
+            {account?.address}
+            &nbsp;
+            <ButtonEx
+              onClick={() => {
+                disconnect({ label: wallet.label });
+              }}
+              title="Disconnect"
+              id="WalletDisconnect"
+              bsPrefix={styles.walletBtnDisconnect}
+            ></ButtonEx>
+          </div>
         </div>
         <Zerox/>
         <Aave/>
