@@ -47,15 +47,19 @@ export default function Zerox() {
       takerAddress: account,
     };
 
-    const response = await fetch(
-      `${process.env.ZEROX_SWAP_API}/quote?${qs.stringify(params)}`
-    );
-    const output = await response.json()
-    console.log(output)
-    const receipt = await web3.eth.sendTransaction(
-      output
-    );
-    console.log(receipt)
+    if (params.sellAmount == 0) {
+      alert("You must enter amount")
+    } else {
+      const response = await fetch(
+        `${process.env.ZEROX_SWAP_API}/quote?${qs.stringify(params)}`
+      );
+      const output = await response.json()
+      console.log(output)
+      const receipt = await web3.eth.sendTransaction(
+        output
+      );
+      console.log(receipt)
+    }
   }
 
   const handleClick = () => {
