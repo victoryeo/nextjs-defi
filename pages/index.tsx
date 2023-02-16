@@ -56,6 +56,7 @@ export default function Home() {
             }}
             title="Disconnect"
             id="WalletDisconnect"
+            bsPrefix={styles.walletBtnDisconnect}
           ></ButtonEx>
         </div>
         <Zerox/>
@@ -77,6 +78,7 @@ export default function Home() {
           }}
           title="Connect"
           id="WalletConnect"
+          bsPrefix={styles.walletBtnConnect}
         ></ButtonEx>
       </div>
       <Zerox/>
