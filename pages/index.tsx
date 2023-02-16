@@ -32,6 +32,12 @@ export default function Home() {
         address: wallet.accounts[0].address,
         balance: wallet.accounts[0].balance
       })
+    } else {
+      dispatch(setUserAddress(""))
+      setAccount({
+        address: "",
+        balance: null
+      })
     }
   }, [wallet])
 
