@@ -53,7 +53,7 @@ export const TokenList = () => {
         <span className={styles.aaveblock}
           key={e.heading} >
           {e.heading} {e.balance} {e.rate} {e.collateral} 
-          <button className={styles.supply} onClick={()=>handleClick(e.heading)} >
+          <button className={styles.supplyLiquidity} onClick={()=>handleClick(e.heading)} >
             Supply
           </button>
         </span>
