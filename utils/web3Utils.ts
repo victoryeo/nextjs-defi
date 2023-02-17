@@ -2,10 +2,16 @@ import { ethers } from 'ethers'
 import contracts from '../config/constants/contracts'
 import { weth_gw_abi } from '../config/abi/WethGateway'
 import { erc20_abi } from '../config/abi/ERC20'
+import { lp_abi } from '../config/abi/LendingPool'
 
 const getContract = (abi: any, address: string, signer: ethers.providers.Provider | ethers.Signer) => {
   const contract = new ethers.Contract(address, abi, signer)
   return contract
+}
+
+export const getLPContract = (signer: ethers.providers.Provider | ethers.Signer) => {
+  console.log("getLPContract", signer)
+  return getContract(lp_abi, contracts.LENDING_POOL[5], signer)
 }
 
 export const getWethGwContract = (signer: ethers.providers.Provider | ethers.Signer): ethers.Contract => {
