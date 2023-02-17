@@ -1,9 +1,11 @@
 .container {
+  align-content: center;
   padding-top: 1rem;
   text-align: center;
 }
 
 .title {
+  width: 50%;
   font-size: 2.2rem;
   font-weight: bold;
   color: #4e4e4e;
@@ -11,7 +13,7 @@
 
 .box {
   margin-top: 2rem;
-  width: 500px;
+  width: 50%;
   border-radius: 15px;
   background-color: #6e9e9e;
   padding: 20px;

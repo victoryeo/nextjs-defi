@@ -4,14 +4,15 @@
 }
 
 .title {
+  width: 90%;
   font-size: 2.2rem;
   font-weight: bold;
   color: #2e24f5;
 }
 
 .box {
+  width: 90%;
   margin-top: 2rem;
-  width: 1000px;
   border-radius: 15px;
   background-color: #ffff9e;
   padding: 20px;
