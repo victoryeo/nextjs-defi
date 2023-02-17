@@ -9,6 +9,8 @@ import Aave from '../components/Aave/Aave';
 import { ButtonEx } from "../components/ButtonEx/ButtonEx";
 import { setUserAddress } from '../redux/reducers/user';
 import { rootActions } from "../redux/reducers";
+import Tabs from "../components/Navigator/Tabs"
+import Layout from "../components/Navigator/Layout"
 
 interface Account {
   address: string;
@@ -68,8 +70,9 @@ export default function Home() {
             ></ButtonEx>
           </div>
         </div>
-        <Zerox/>
-        <Aave/>
+        <Layout>
+          <Tabs />
+        </Layout>
       </div>
     );
   }
@@ -90,8 +93,9 @@ export default function Home() {
           bsPrefix={styles.walletBtnConnect}
         ></ButtonEx>
       </div>
-      <Zerox/>
-      <Aave/>
+      <Layout>
+        <Tabs />
+      </Layout>
     </div>
   )
 }
