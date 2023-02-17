@@ -71,3 +71,15 @@
   margin-left: 20px;
   font-family: arial;
 }
+
+.tokenHeader {
+  justify-content: space-between;
+  font-size: 1rem;
+  font-family: arial;
+}
+
+.tokenList {
+  display: block;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
