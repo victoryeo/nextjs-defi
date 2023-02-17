@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { useSelector } from "react-redux";
-import { getWethGwContract, getDaiContract } from "../../utils/web3Utils";
+import { getWethGwContract, getDaiContract, getLPContract } from "../../utils/web3Utils";
 import { selectSigner } from "../../redux/selectors"
 import { selectUserAddress } from "../../redux/selectors/user";
 import contracts from "../../config/constants/contracts";
@@ -23,6 +23,7 @@ const tokenList = [
 
 let contractWETH: ethers.Contract;
 let contractDAI: ethers.Contract;
+let contractLP: ethers.Contract;
 let account: string;
 
 const handleClick = async (token) => {
@@ -36,6 +37,18 @@ const handleClick = async (token) => {
       1 /* 1wei */
     );
     await approval.wait();
+
+    const daiAddr = contracts.DAI_CONTRACT[5];
+    const newSupply = await contractLP.supply(
+      daiAddr,
+      1 /* 1wei */,
+      account,
+      0, // referralCode -- set to 0
+      overrides
+    );
+    console.log(newSupply);
+    const res = await newSupply.wait();
+    console.log(res)
   } else if (token === "ETH") {
     console.log("supply ETH")
     console.log(account)
@@ -56,9 +69,10 @@ export const TokenList = () => {
   const signer = useSelector(selectSigner);
   contractWETH = getWethGwContract(signer);
   contractDAI = getDaiContract(signer);
+  contractLP = getLPContract(signer);
 
   return(
-    <div>
+    <div className={styles.tokenList}>
       {tokenList.map((e: any) => (
         <span className={styles.aaveblock}
           key={e.heading} >
