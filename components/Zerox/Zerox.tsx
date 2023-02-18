@@ -13,7 +13,7 @@ export default function Zerox() {
   const [to, setTo] = useState("");
   const [buttonText, setButtonText] = useState("");
   //const [account, setAccount] = useState("");
-  const buttonTexts = ["Disable", "Swap"];
+  const buttonTextArray = ["Disable", "Swap"];
 
   const web3 = new Web3(Web3.givenProvider);
 
@@ -32,9 +32,9 @@ export default function Zerox() {
 
   useEffect(() => {
     if (account == "" || account == null) {
-      setButtonText(buttonTexts[0]);
+      setButtonText(buttonTextArray[0]);
     } else {
-      setButtonText(buttonTexts[1]);
+      setButtonText(buttonTextArray[1]);
     }
   }, [account]);
 
