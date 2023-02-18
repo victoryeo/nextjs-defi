@@ -4,14 +4,12 @@ import { SupplyTokenList } from "./SupplyTokenList";
 import styles from "./Aave.module.css";
 
 const listSupply = [{
-    header: 'Assets',
-  },{
-    header: 'Wallet balance',
-  },{
-    header: 'APY',
-  },{
-    header: 'Can be collateral',
-  },
+    tokenName: 'Assets',
+    balance: 'Wallet balance',
+    rate: 'APY',
+    collateral: 'Can be collateral',
+    action: 'Action',
+  }
 ];
 
 const listBorrow = [{
