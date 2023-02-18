@@ -13,14 +13,12 @@ const listSupply = [{
 ];
 
 const listBorrow = [{
-    header: 'Assets',
-  },{
-    header: 'Available',
-  },{
-    header: 'APY, variable',
-  },{
-    header: 'APY, stable',
-  },
+    tokenName: 'Assets',
+    available: 'Available',
+    varrate: 'APY, variable',
+    stablerate: 'APY, stable',
+    action: 'Action',
+  }
 ];
 
 export default function Aave() {
