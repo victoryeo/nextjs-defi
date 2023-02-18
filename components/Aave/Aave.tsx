@@ -1,6 +1,7 @@
 import { AaveSupplyTab } from "./AaveSupplyTab";
 import { AaveBorrowTab } from "./AaveBorrowTab";
 import { SupplyTokenList } from "./SupplyTokenList";
+import { BorrowTokenList } from "./BorrowTokenList";
 import styles from "./Aave.module.css";
 
 const listSupply = [{
@@ -41,6 +42,7 @@ export default function Aave() {
             <AaveBorrowTab
             listTab={listBorrow}
             />
+            <BorrowTokenList/>
           </div>
         </div>
       </div>
