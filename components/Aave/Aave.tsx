@@ -25,7 +25,7 @@ const listBorrow = [{
 export default function Aave() {
   return(
     <div className={styles.container}>
-      <div className={styles.title}>Aave API
+      <div className={styles.title}>Aave Lend and Borrow API
       </div>
       <div className={styles.box}>
         <div className={styles.aave}>

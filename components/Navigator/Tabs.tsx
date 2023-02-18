@@ -22,7 +22,7 @@ const Tabs = ({ router }) => {
         </Tab>
         <Tab selected={isTabTwo}>
           <Link href={{ pathname: "/", query: { tab: "2" } }}>
-            <a>Zerox</a>
+            <a>0x</a>
           </Link>
         </Tab>
       </TabHead>
