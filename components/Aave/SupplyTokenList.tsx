@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { useSelector } from "react-redux";
 import { getWethGwContract, getDaiContract, getLPContract } from "../../utils/web3Utils";
@@ -64,12 +65,31 @@ const handleClick = async (token) => {
   }
 }
 
-export const TokenList = () => {
+export const SupplyTokenList = () => {
+  const buttonTextArray = ["Disable", "Supply"];
+  const [buttonText, setButtonText] = useState("");
+
   account = useSelector(selectUserAddress);
   const signer = useSelector(selectSigner);
   contractWETH = getWethGwContract(signer);
   contractDAI = getDaiContract(signer);
   contractLP = getLPContract(signer);
+
+  useEffect(() => {
+    if (account == "" || account == null) {
+      setButtonText(buttonTextArray[0]);
+    } else {
+      setButtonText(buttonTextArray[1]);
+    }
+  }, [account]);
+
+  useEffect(() => {
+    if (account == "" || account == null) {
+      setButtonText(buttonTextArray[0]);
+    } else {
+      setButtonText(buttonTextArray[1]);
+    }
+  }, []);
 
   return(
     <div className={styles.tokenList}>
@@ -81,7 +101,7 @@ export const TokenList = () => {
           {e.rate} &nbsp;&nbsp;&nbsp; 
           {e.collateral} 
           <button className={styles.supplyLiquidity} onClick={()=>handleClick(e.heading)} >
-            Supply
+            {buttonText}
           </button>
         </span>
       ))}
