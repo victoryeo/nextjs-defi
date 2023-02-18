@@ -32,6 +32,9 @@ export const TabContainer = styled("div")`
 
 export const TabBody = styled(PageBody)`
   height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 `
 
 export const Tab = styled("div")`
