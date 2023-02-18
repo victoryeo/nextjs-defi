@@ -44,9 +44,16 @@ const handleClick = async (token) => {
     console.log("borrow DAI")
 
   } else if (token === "ETH") {
-    console.log("supply ETH")
+    console.log("borrow ETH")
     console.log(account)
 
+    let newBorrow = await contractWETH.borrowETH(contractLP.address, 
+      1, // 1wei
+      2, // interestRateMode --  1 -> stable, 2 -> variable
+      0, // referralCode -- set to 0
+      overrides)
+    await newBorrow.wait()
+    console.log(newBorrow)
   }
 }
 
