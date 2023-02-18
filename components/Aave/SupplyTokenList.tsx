@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { useSelector } from "react-redux";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Button,
+} from "@mui/material";
 import { getWethGwContract, getDaiContract, getLPContract } from "../../utils/web3Utils";
 import { selectSigner } from "../../redux/selectors"
 import { selectUserAddress } from "../../redux/selectors/user";
@@ -9,13 +19,13 @@ import styles from "./Aave.module.css";
 
 const tokenList = [
   {
-    heading: 'ETH',
+    tokenName: 'ETH',
     balance: 10,
     rate: '<0.01%',
     collateral: 'yes'
   },
   {
-    heading: 'DAI',
+    tokenName: 'DAI',
     balance: 20,
     rate: '<0.01%',
     collateral: 'yes'
@@ -92,21 +102,28 @@ export const SupplyTokenList = () => {
   }, []);
 
   return(
-    <div className={styles.tokenList}>
-      {tokenList.map((e: any) => (
-        <span className={styles.aaveblock}
-          key={e.heading} >
-          {e.heading} &nbsp;&nbsp;&nbsp; 
-          {e.balance} &nbsp;&nbsp;&nbsp; 
-          {e.rate} &nbsp;&nbsp;&nbsp; 
-          {e.collateral} 
-            <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
-            onClick={()=>handleClick(e.heading)} 
-            disabled={buttonText==="Disable"?true:false}>
-            {buttonText}
-          </button>
-        </span>
-      ))}
-    </div>
+    <TableContainer>
+      <Table>
+
+        <TableBody className={styles.tokenList}>
+          {tokenList.map((e, index) => (
+            <TableRow key={index}>
+            <TableCell style={{width: '15%'}}>{e.tokenName} </TableCell>
+            <TableCell style={{width: '25%'}}>{e.balance} </TableCell>
+            <TableCell style={{width: '20%'}}>{e.rate} </TableCell>
+            <TableCell style={{width: '20%'}}>{e.collateral} </TableCell>
+            <TableCell style={{width: '20%'}}>
+              <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
+                onClick={()=>handleClick(e.tokenName)} 
+                disabled={buttonText==="Disable"?true:false}>
+                {buttonText}
+              </button>
+            </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>    
+    
   )
 }
