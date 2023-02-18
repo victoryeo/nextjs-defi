@@ -15,13 +15,13 @@ const listSupply = [{
 ];
 
 const listBorrow = [{
-    heading: 'Assets',
+    header: 'Assets',
   },{
-    heading: 'Available',
+    header: 'Available',
   },{
-    heading: 'APY, variable',
+    header: 'APY, variable',
   },{
-    heading: 'APY, stable',
+    header: 'APY, stable',
   },
 ];
 

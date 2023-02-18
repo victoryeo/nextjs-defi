@@ -5,8 +5,8 @@ export const AaveBorrowTab = ({ listTab, setStatusFilter, status }: any) => {
     <div className={styles.tokenHeader}>
       {listTab.map((e: any) => (
         <span className={styles.aavespan}
-          key={e.heading}>
-          {e.heading}
+          key={e.header}>
+          {e.header}
         </span>
       ))}
     </div>
