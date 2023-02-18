@@ -73,6 +73,19 @@
   font-family: arial;
 }
 
+.disableButton {
+  border-radius: 8px;
+  background-color: #000000;
+  border: 'none';
+  font-size: 1.4rem;
+  cursor: alias;
+  color: white;
+  padding: 6px 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-family: arial;
+}
+
 .tokenHeader {
   justify-content: space-between;
   font-size: 1rem;

@@ -100,7 +100,9 @@ export const SupplyTokenList = () => {
           {e.balance} &nbsp;&nbsp;&nbsp; 
           {e.rate} &nbsp;&nbsp;&nbsp; 
           {e.collateral} 
-          <button className={styles.supplyLiquidity} onClick={()=>handleClick(e.heading)} >
+            <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
+            onClick={()=>handleClick(e.heading)} 
+            disabled={buttonText==="Disable"?true:false}>
             {buttonText}
           </button>
         </span>
