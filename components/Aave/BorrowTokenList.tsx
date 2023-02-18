@@ -42,18 +42,28 @@ const handleClick = async (token) => {
   const overrides = { gasLimit: 1000000, gasPrice: 210000 };
   if (token === "DAI") {
     console.log("borrow DAI")
-
+    const newBorrow = await contractLP.borrow(
+      contracts.DAI_CONTRACT[5],
+      1, // 1 wei
+      2, // interestRateMode --  1 -> stable, 2 -> variable
+      0, // referralCode -- set to 0
+      account,
+      overrides
+      );
+    console.log(newBorrow);
+    const res = await newBorrow.wait();
+    console.log(res);
   } else if (token === "ETH") {
     console.log("borrow ETH")
     console.log(account)
 
-    let newBorrow = await contractWETH.borrowETH(contractLP.address, 
+    const newBorrow = await contractWETH.borrowETH(contractLP.address, 
       1, // 1wei
       2, // interestRateMode --  1 -> stable, 2 -> variable
       0, // referralCode -- set to 0
       overrides)
-    await newBorrow.wait()
-    console.log(newBorrow)
+    const res = await newBorrow.wait()
+    console.log(res)
   }
 }
 
