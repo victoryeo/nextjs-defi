@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { Provider } from "react-redux";
@@ -64,6 +64,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const { store, props } = wrapper.useWrappedStore(pageProps);
   const calculation = useMemo(() => expensiveCalculation(count), [count]);
+  // handleClick variable has always the same callback function object 
+  // between renderings of App.
+  const handleClick = useCallback((pageDetails) => {
+    console.log(pageDetails)
+  }, [count]);
 
   return (
     <Provider store={store}>
