@@ -14,7 +14,7 @@ export const AaveBorrowTab = ({ listTab, setStatusFilter, status }: any) => {
       <Table>
         <TableHead>
           {listTab.map((e, index) => (
-            <TableRow key={index} > 
+            <TableRow key={e.tokenName} > 
               <TableCell style={{width: '15%'}} className={styles.tokenHeader}>
                 {e.tokenName}
               </TableCell>
