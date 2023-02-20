@@ -99,7 +99,7 @@ export const BorrowTokenList = () => {
 
         <TableBody className={styles.tokenList}>
           {tokenList.map((e, index) => (
-            <TableRow key={index}>
+            <TableRow key={e.tokenName}>
             <TableCell style={{width: '15%'}}>{e.tokenName} </TableCell>
             <TableCell style={{width: '25%'}}>{e.available} </TableCell>
             <TableCell style={{width: '20%'}}>{e.varrate} </TableCell>
