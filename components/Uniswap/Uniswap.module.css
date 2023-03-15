@@ -36,9 +36,22 @@
   font-size: 2rem;
   color: #741576;
   width: 60%;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #521e4c;
   border: 10px;
-  border-radius: 3px;
+  border-radius: 10px;
   box-sizing: border-box;
+}
+
+.token {
+  margin: 0.3rem 0;
+  font-size: 1.5rem;
+  color: #dbe9f5;
+  width: 100px;
+  padding: 1rem;
+  background-color: #621653;
+  border: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-left: 2rem;
 }

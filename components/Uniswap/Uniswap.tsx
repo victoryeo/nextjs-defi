@@ -4,7 +4,16 @@ import styles from "./Uniswap.module.css"
 export default function Uniswap() {
   const [fromValue, setFromValue] = useState<string>("");
   const [toValue, setToValue] = useState<string>("")
-  
+  const [fromToken, setFromToken] = useState<string>("ETH");
+
+  const handleTokenClick = () => {
+
+  }
+
+  const handleTokenChange = () => {
+
+  }
+
   return (
     <div className={styles.container}>
       <div  className={styles.title}>UNISWAP API</div>
@@ -23,6 +32,12 @@ export default function Uniswap() {
               }
             }}
           />
+          <button className={styles.token} onClick={() => handleTokenClick()}>
+            {fromToken}
+          </button>
+          <button className={styles.change} onClick={() => handleTokenChange()}>
+            swap
+          </button>
         </div>
       </div>
     </div>
