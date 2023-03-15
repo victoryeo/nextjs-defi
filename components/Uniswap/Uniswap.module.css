@@ -25,6 +25,7 @@
   box-shadow: 0px 0px 0px #eee;
 }
 
+.toAsset,
 .fromAsset {
   display: flex;
   justify-content: center;
