@@ -24,3 +24,21 @@
   padding: 11px;
   box-shadow: 0px 0px 0px #eee;
 }
+
+.fromAsset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:1rem 1rem;
+}
+
+.input {
+  font-size: 2rem;
+  color: #741576;
+  width: 60%;
+  padding: 2rem;
+  background-color: #521e4c;
+  border: 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
