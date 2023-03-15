@@ -1,0 +1,26 @@
+.container {
+  font-family: sans-serif;
+  padding-top: 0rem;
+  text-align: center;
+  background-color: #b5fdd9;
+  border-radius: 2rem;
+  padding: 1.1rem 1rem 1rem;
+  box-shadow: 1px 0px 1px #5880a2;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #2d096b;
+  text-align: center;
+  margin: 0.8 1.1rem;
+}
+
+.box {
+  margin-top: 0rem;
+  width: 600px;
+  border-radius: 8px;
+  background-color: #0d62ac;
+  padding: 11px;
+  box-shadow: 0px 0px 0px #eee;
+}
