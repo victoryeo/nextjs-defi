@@ -68,6 +68,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   // between renderings of App.
   const handleClick = useCallback((pageDetails) => {
     console.log(pageDetails)
+    setCount(1)
   }, [count]);
 
   return (
