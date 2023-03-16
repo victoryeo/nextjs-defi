@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUserAddress } from "../../redux/selectors/user";
+
 import styles from "./Uniswap.module.css"
 
 export default function Uniswap() {
@@ -6,6 +9,7 @@ export default function Uniswap() {
   const [toValue, setToValue] = useState<string>("")
   const [fromToken, setFromToken] = useState<string>("ETH");
   const [toToken, setToToken] = useState<string>("UNI");
+  const account = useSelector(selectUserAddress);
 
   const handleTokenClick = () => {
 
@@ -38,7 +42,7 @@ export default function Uniswap() {
           </button>
         </div>
         <button className={styles.change} onClick={() => handleTokenChange()}>
-          swap
+          flip
         </button>  
         <div className={styles.toAsset}>
           <input
@@ -52,6 +56,12 @@ export default function Uniswap() {
             {toToken}
           </button>
         </div>
+        <button
+          className={
+            account === "" || !account ? styles.btnDisabled : styles.btnSwap
+          }>
+          Swap
+        </button>
       </div>
     </div>
   )

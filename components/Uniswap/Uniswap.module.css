@@ -56,3 +56,27 @@
   box-sizing: border-box;
   margin-left: 2rem;
 }
+
+.btnDisabled {
+  border-radius: 1px;
+  width: 50%;
+  padding: 18px 18spx;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.btnSwap {
+  font-family: sans-serif;
+  border-radius: 10px;
+  width: 90%;
+  padding: 18px 36px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  background-color: #5e0a49;
+  color: #13171b;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border: none;
+  margin-bottom: 1rem;
+}
