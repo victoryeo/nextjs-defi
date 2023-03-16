@@ -5,6 +5,7 @@ export default function Uniswap() {
   const [fromValue, setFromValue] = useState<string>("");
   const [toValue, setToValue] = useState<string>("")
   const [fromToken, setFromToken] = useState<string>("ETH");
+  const [toToken, setToToken] = useState<string>("UNI");
 
   const handleTokenClick = () => {
 
@@ -35,12 +36,21 @@ export default function Uniswap() {
           <button className={styles.token} onClick={() => handleTokenClick()}>
             {fromToken}
           </button>
-          <button className={styles.change} onClick={() => handleTokenChange()}>
-            swap
+        </div>
+        <button className={styles.change} onClick={() => handleTokenChange()}>
+          swap
+        </button>  
+        <div className={styles.toAsset}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="0"
+            value={toValue}
+            onChange={(e) => setToValue(e.target.value)}
+          />
+          <button className={styles.token} onClick={() => handleTokenClick()}>
+            {toToken}
           </button>
-          <div className={styles.toAsset}>
-            
-          </div>
         </div>
       </div>
     </div>
