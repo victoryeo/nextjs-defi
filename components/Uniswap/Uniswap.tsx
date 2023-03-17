@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { ethers } from "ethers";
 import { selectUserAddress } from "../../redux/selectors/user";
 
 import styles from "./Uniswap.module.css"
@@ -19,8 +20,13 @@ export default function Uniswap() {
 
   }
 
-  const executeSwap = () => {
-
+  const ETH_DECIMAL_PT = 18
+  
+  const executeSwap = (fromValue: string) => {
+    const amount = ethers.utils
+      .parseUnits(fromValue, ETH_DECIMAL_PT)
+      .toString();
+    console.log(amount)
   }
 
   return (
@@ -64,7 +70,7 @@ export default function Uniswap() {
           className={
             account === "" || !account ? styles.btnDisabled : styles.btnSwap
           }
-          onClick={() => executeSwap()}
+          onClick={() => executeSwap(fromValue)}
         >
           Swap
         </button>
