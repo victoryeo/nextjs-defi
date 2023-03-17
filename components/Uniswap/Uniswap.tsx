@@ -19,6 +19,10 @@ export default function Uniswap() {
 
   }
 
+  const executeSwap = () => {
+
+  }
+
   return (
     <div className={styles.container}>
       <div  className={styles.title}>UNISWAP API</div>
@@ -59,7 +63,9 @@ export default function Uniswap() {
         <button
           className={
             account === "" || !account ? styles.btnDisabled : styles.btnSwap
-          }>
+          }
+          onClick={() => executeSwap()}
+        >
           Swap
         </button>
       </div>
