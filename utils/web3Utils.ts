@@ -1,4 +1,5 @@
 import { ethers } from 'ethers'
+import { Token } from "@uniswap/sdk-core";
 import contracts from '../config/constants/contracts'
 import { weth_gw_abi } from '../config/abi/WethGateway'
 import { erc20_abi } from '../config/abi/ERC20'
@@ -22,4 +23,22 @@ export const getWethGwContract = (signer: ethers.providers.Provider | ethers.Sig
 export const getDaiContract = (signer: ethers.providers.Provider | ethers.Signer) => {
   console.log('getDaiContract', signer)
   return getContract(erc20_abi, contracts.DAI_CONTRACT[5], signer)
+}
+
+export async function getTokenTransferApproval(
+  signer: ethers.providers.Provider | ethers.Signer,
+  token: Token,
+  amount: string,
+): Promise<any> {
+  try {
+    const tokenContract: ethers.Contract = getContract(erc20_abi, token.address, signer);
+
+    const transaction = await tokenContract.approve(contracts.V3_SWAP_ROUTER_ADDRESS[5], amount);
+
+    const receipt = await transaction.wait();
+    return receipt;
+  } catch (e) {
+    console.error(e)
+    return null;
+  }
 }
