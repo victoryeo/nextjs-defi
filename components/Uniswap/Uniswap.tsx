@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { AlphaRouter, SwapOptionsSwapRouter02, SwapType, SwapRoute, ChainId } from "@uniswap/smart-order-router";
 import { Percent, CurrencyAmount, TradeType, Token } from "@uniswap/sdk-core";
+import contracts from '../../config/constants/contracts'
 import { selectUserAddress } from "../../redux/selectors/user";
 import { selectSigner, selectWeb3Provider } from "../../redux/selectors/";
 import { WETH_TOKEN, UNI_TOKEN } from "../../config/tokens";
@@ -64,9 +65,20 @@ export default function Uniswap() {
 
     // give approval to swap router
     const tokenApproval = await getTokenTransferApproval(signer, WETH_TOKEN, amount)
-
     console.log(tokenApproval)
 
+    // send transaction
+    const tx = [{
+      from: account,
+      to: contracts.V3_SWAP_ROUTER_ADDRESS[5],
+      value: route.methodParameters?.value,
+      data: route.methodParameters?.calldata,
+      maxFeePerGas: "200000000",
+      maxPriorityFeePerGas: "200000000",
+    }];
+
+    const receipt = await web3Provider.send('eth_sendTransaction', tx)
+    console.log(receipt)
   }
 
   return (
