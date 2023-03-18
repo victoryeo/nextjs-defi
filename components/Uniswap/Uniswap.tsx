@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
+import { AlphaRouter, SwapOptionsSwapRouter02, SwapType } from "@uniswap/smart-order-router";
+import { Percent } from "@uniswap/sdk-core";
 import { selectUserAddress } from "../../redux/selectors/user";
+import { selectSigner, selectWeb3Provider } from "../../redux/selectors/";
 
 import styles from "./Uniswap.module.css"
 
@@ -11,6 +14,7 @@ export default function Uniswap() {
   const [fromToken, setFromToken] = useState<string>("ETH");
   const [toToken, setToToken] = useState<string>("UNI");
   const account = useSelector(selectUserAddress);
+  const web3Provider = useSelector(selectWeb3Provider);
 
   const handleTokenClick = () => {
 
@@ -21,12 +25,25 @@ export default function Uniswap() {
   }
 
   const ETH_DECIMAL_PT = 18
+  const GOERLI_ID = 5
   
   const executeSwap = (fromValue: string) => {
     const amount = ethers.utils
       .parseUnits(fromValue, ETH_DECIMAL_PT)
       .toString();
     console.log(amount)
+
+    const router = new AlphaRouter({
+      chainId: GOERLI_ID,
+      provider: web3Provider,
+    });
+
+    const options: SwapOptionsSwapRouter02 = {
+      recipient: account,
+      slippageTolerance: new Percent(50, 10_000),
+      deadline: Math.floor(Date.now() / 1000 + 1800),
+      type: SwapType.SWAP_ROUTER_02,
+    }
   }
 
   return (
