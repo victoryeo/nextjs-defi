@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
-import { AlphaRouter, SwapOptionsSwapRouter02, SwapType } from "@uniswap/smart-order-router";
+import { AlphaRouter, SwapOptionsSwapRouter02, SwapType, SwapRoute, ChainId } from "@uniswap/smart-order-router";
 import { Percent, CurrencyAmount, TradeType, Token } from "@uniswap/sdk-core";
 import { selectUserAddress } from "../../redux/selectors/user";
 import { selectSigner, selectWeb3Provider } from "../../redux/selectors/";
 import { WETH_TOKEN, UNI_TOKEN } from "../../config/tokens";
+import { getTokenTransferApproval } from "../../utils/web3Utils";
 
 import styles from "./Uniswap.module.css"
 
 export default function Uniswap() {
   const [fromValue, setFromValue] = useState<string>("");
   const [toValue, setToValue] = useState<string>("")
-  const [fromToken, setFromToken] = useState<string>("ETH");
+  const [fromToken, setFromToken] = useState<string>("WETH");
   const [toToken, setToToken] = useState<string>("UNI");
   const account = useSelector(selectUserAddress);
   const web3Provider = useSelector(selectWeb3Provider);
+  const signer = useSelector(selectSigner);
 
   const handleTokenClick = () => {
 
@@ -27,17 +29,17 @@ export default function Uniswap() {
 
   const ETH_DECIMAL_PT = 18
   const GOERLI_ID = 5
-  
+
   const executeSwap = async (fromValue: string) => {
     // convert to wei
-    const amount = ethers.utils
+    const amount: string = ethers.utils
       .parseUnits(fromValue, ETH_DECIMAL_PT)
       .toString();
     console.log(amount)
 
     // create router instance
     const router = new AlphaRouter({
-      chainId: GOERLI_ID,
+      chainId: ChainId.GÖRLI,
       provider: web3Provider,
     });
 
@@ -50,7 +52,7 @@ export default function Uniswap() {
     }
 
     // create a route 
-    const route = await router.route(
+    const route: SwapRoute = await router.route(
       CurrencyAmount.fromRawAmount(
         WETH_TOKEN,
         amount
@@ -59,6 +61,12 @@ export default function Uniswap() {
       TradeType.EXACT_INPUT,
       options
     );
+
+    // give approval to swap router
+    const tokenApproval = await getTokenTransferApproval(signer, WETH_TOKEN, amount)
+
+    console.log(tokenApproval)
+
   }
 
   return (
