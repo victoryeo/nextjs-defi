@@ -12,6 +12,8 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
     "@reduxjs/toolkit": "^1.9.1",
+    "@uniswap/sdk-core": "^3.2.2",
+    "@uniswap/smart-order-router": "^3.8.0",
     "@web3-onboard/core": "^2.13.0",
     "@web3-onboard/injected-wallets": "^2.5.0",
     "@web3-onboard/react": "^2.5.4",
