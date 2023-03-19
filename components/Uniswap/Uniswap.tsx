@@ -85,6 +85,7 @@ export default function Uniswap() {
     <div className={styles.container}>
       <div  className={styles.title}>UNISWAP API</div>
       <div className={styles.box}>
+        Enter in unit of ether (not wei)
         <div className={styles.fromAsset}>
           <input
             className={styles.input}
