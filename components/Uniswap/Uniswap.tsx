@@ -103,10 +103,7 @@ export default function Uniswap() {
           <button className={styles.token} onClick={() => handleTokenClick()}>
             {fromToken}
           </button>
-        </div>
-        <button className={styles.change} onClick={() => handleTokenChange()}>
-          flip
-        </button>  
+        </div> 
         <div className={styles.toAsset}>
           <input
             className={styles.input}
