@@ -13,6 +13,8 @@ It has 3 parts:
 1. call 0x swap API  to swap ETH to DAI  
 2. Call Aave smart contract to supply liquidity  
 3. Call Uniswap smart contract to swap erc20 tokens  
+  
+Error handling:  
 
 ```  
 If you see the error below, it could be because you did not have enough WETH token
