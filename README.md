@@ -18,7 +18,7 @@ Error handling:
 
 ```  
 If you see the error below, it could be because you did not have enough WETH token
-Fail with error 'STF'
+Error: Fail with error 'STF'
 ```
 and
 ```
